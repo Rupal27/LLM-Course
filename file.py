@@ -1,8 +1,7 @@
 from transformers import pipeline
 import torch
-
-print("PyTorch version:", torch.__version__)
-print("CUDA available:", torch.cuda.is_available())
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+hf auth login
 
 # Load Dolly v2 1B on CPU
 generator = pipeline(
@@ -12,13 +11,13 @@ generator = pipeline(
     device=-1,
     framework="pt"
 )
-prompt = "Suggest one popular North Indian dish to eat (just the name):"
+prompt = "Suggest one popular American POP star to listen to:"
 
 # Slightly higher max_new_tokens and small positive temperature
 response = generator(
     prompt,
     max_new_tokens=20,
-    temperature=0.01
+    temperature=0.001
 )
 
 dish_name = response[0]["generated_text"].strip()
